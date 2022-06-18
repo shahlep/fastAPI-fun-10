@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI,Response,status
 from typing import Optional
 from pydantic import BaseModel
 from random import randrange
@@ -47,6 +47,8 @@ def get_latest_post():
 
 
 @app.get("/posts/{id}")
-def get_posts_by_id(id: int):
+def get_posts_by_id(id: int, response:Response):
     post = get_posts(id)
+    if post is None:
+        response.status_code = status.HTTP_404_NOT_FOUND
     return {"Posts": post}
