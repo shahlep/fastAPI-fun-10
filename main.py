@@ -13,7 +13,7 @@ class Post(BaseModel):
     rating: Optional[int] = None
 
 
-my_posts = []
+my_posts = [{"title":"test title","content":"test content","published":False}]
 
 
 @app.get("/")
