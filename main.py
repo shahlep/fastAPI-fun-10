@@ -11,7 +11,10 @@ class Post(BaseModel):
     content: str
     published: bool = True
     rating: Optional[int] = None
+
+
 my_posts = []
+
 
 @app.get("/")
 def index():
@@ -21,6 +24,6 @@ def index():
 @app.post("/posts")
 def create_posts(post: Post):
     post_dict = post.dict()
-    post_dict['id']= randrange(0,1000)
+    post_dict["id"] = randrange(0, 1000)
     my_posts.append(post_dict)
     return {"new_post": my_posts}
