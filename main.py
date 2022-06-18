@@ -28,12 +28,14 @@ def create_posts(post: Post):
     my_posts.append(post_dict)
     return {"new_post": my_posts}
 
-def get_posts(id:int):
+
+def get_posts(id: int):
     for p in my_posts:
-        if p['id'] == id:
+        if p["id"] == id:
             return p
 
+
 @app.post("/posts/{id}")
-def get_posts_by_id(id:int):
+def get_posts_by_id(id: int):
     post = get_posts(id)
     return {"Posts": post}
