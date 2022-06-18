@@ -8,8 +8,8 @@ app = FastAPI()
 class Post(BaseModel):
     title: str
     content: str
-    published:bool = True
-    rating:Optional[int] = None
+    published: bool = True
+    rating: Optional[int] = None
 
 
 @app.get("/")
@@ -18,6 +18,6 @@ def index():
 
 
 @app.post("/create_posts")
-def create_posts(post:Post):
+def create_posts(post: Post):
     print(post)
     return {"new_post": f"{post.content}"}
