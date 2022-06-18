@@ -7,14 +7,16 @@ app = FastAPI()
 
 
 class Post(BaseModel):
-    id:int
+    id: int
     title: str
     content: str
     published: bool = True
     rating: Optional[int] = None
 
 
-my_posts = [{"title": "test title", "content": "test content", "published": False,"id":1}]
+my_posts = [
+    {"title": "test title", "content": "test content", "published": False, "id": 1}
+]
 
 
 @app.get("/")
@@ -37,13 +39,13 @@ def get_all_posts():
 
 def get_posts(id: int):
     for p in my_posts:
-        if p['id'] == id:
+        if p["id"] == id:
             return p
 
 
 def find_index_post(id: int):
     for i, p in enumerate(my_posts):
-        if p['id'] == id:
+        if p["id"] == id:
             return i
 
 
@@ -68,6 +70,9 @@ def get_posts_by_id(id: int, response: Response):
 def delete_post(id: int):
     post_index = find_index_post(id)
     if post_index is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"Post with id {id} doesn't exist")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Post with id {id} doesn't exist",
+        )
     my_posts.pop(post_index)
     return Response(status_code=status.HTTP_204_NO_CONTENT)
