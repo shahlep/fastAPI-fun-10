@@ -1,4 +1,4 @@
-from fastapi import FastAPI,Response,status,HTTPException
+from fastapi import FastAPI, Response, status, HTTPException
 from typing import Optional
 from pydantic import BaseModel
 from random import randrange
@@ -13,7 +13,7 @@ class Post(BaseModel):
     rating: Optional[int] = None
 
 
-my_posts = [{"title":"test title","content":"test content","published":False}]
+my_posts = [{"title": "test title", "content": "test content", "published": False}]
 
 
 @app.get("/")
@@ -36,12 +36,13 @@ def get_all_posts():
 
 def get_posts(id: int):
     for p in my_posts:
-        if p['id'] == id:
+        if p["id"] == id:
             return p
 
-def find_index_post(id:int):
-    for i,p in enumerate(my_posts):
-        if p['id'] == id:
+
+def find_index_post(id: int):
+    for i, p in enumerate(my_posts):
+        if p["id"] == id:
             return i
 
 
@@ -52,13 +53,18 @@ def get_latest_post():
 
 
 @app.get("/posts/{id}")
-def get_posts_by_id(id: int, response:Response):
+def get_posts_by_id(id: int, response: Response):
     post = get_posts(id)
     if post is None:
-        #response.status_code = status.HTTP_404_NOT_FOUND
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"post with id {id} not found")
+        # response.status_code = status.HTTP_404_NOT_FOUND
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail=f"post with id {id} not found"
+        )
     return {"Posts": post}
 
-@app.delete("/posts/{id}")
-def delete_post(id:int):
 
+@app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_post(id: int):
+    post_index = find_index_post(id)
+    my_posts.pop(post_index)
+    return Response(status_code=status.HTTP_204_NO_CONTENT)
