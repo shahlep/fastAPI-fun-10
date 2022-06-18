@@ -39,6 +39,11 @@ def get_posts(id: int):
         if p['id'] == id:
             return p
 
+def find_index_post(id:int):
+    for i,p in enumerate(my_posts):
+        if p['id'] == id:
+            return i
+
 
 @app.get("/posts/latest")
 def get_latest_post():
@@ -53,3 +58,7 @@ def get_posts_by_id(id: int, response:Response):
         #response.status_code = status.HTTP_404_NOT_FOUND
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"post with id {id} not found")
     return {"Posts": post}
+
+@app.delete("/posts/{id}")
+def delete_post(id:int):
+
