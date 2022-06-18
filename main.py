@@ -27,3 +27,13 @@ def create_posts(post: Post):
     post_dict["id"] = randrange(0, 1000)
     my_posts.append(post_dict)
     return {"new_post": my_posts}
+
+def get_posts(id:int):
+    for p in my_posts:
+        if p['id'] == id:
+            return p
+
+@app.post("/posts/{id}")
+def get_posts_by_id(id:int):
+    post = get_posts(id)
+    return {"Posts": post}
