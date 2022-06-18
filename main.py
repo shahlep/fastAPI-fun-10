@@ -42,12 +42,11 @@ def get_posts(id: int):
 
 @app.get("/posts/latest")
 def get_latest_post():
-    post= my_posts[len(my_posts)-1]
-    return {"detail":post}
+    post = my_posts[len(my_posts) - 1]
+    return {"detail": post}
+
 
 @app.get("/posts/{id}")
 def get_posts_by_id(id: int):
     post = get_posts(id)
     return {"Posts": post}
-
-
