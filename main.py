@@ -28,9 +28,11 @@ def create_posts(post: Post):
     my_posts.append(post_dict)
     return {"new_post": my_posts}
 
+
 @app.get("/posts")
 def get_all_posts():
     return {"Posts": my_posts}
+
 
 def get_posts(id: int):
     for p in my_posts:
