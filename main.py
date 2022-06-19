@@ -16,7 +16,7 @@ class Post(BaseModel):
 
 my_posts = [
     {"title": "test title", "content": "test content", "published": False, "id": 1},
-{"title": "test title2", "content": "test content2", "published": False, "id": 2}
+    {"title": "test title2", "content": "test content2", "published": False, "id": 2},
 ]
 
 
