@@ -2,6 +2,8 @@ from fastapi import FastAPI, Response, status, HTTPException
 from typing import Optional
 from pydantic import BaseModel
 from random import randrange
+from config import settings
+import psycopg2
 
 app = FastAPI()
 
