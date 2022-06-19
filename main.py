@@ -1,13 +1,16 @@
 from fastapi import FastAPI, Response, status, HTTPException
 from typing import Optional
 from pydantic import BaseModel
-from random import randrange
 from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
+from . import models
+from .database import engine,Base
+
 
 app = FastAPI()
 
+models.Base.metadata.create_all(bind=engine)
 
 class Post(BaseModel):
     title: str
