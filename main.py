@@ -93,7 +93,7 @@ def get_posts_by_id(id: int):
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int):
-    cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """,(str(id)))
+    cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """, (str(id)))
     deleted_post = cursor.fetchone()
     conn.commit()
 
@@ -104,6 +104,7 @@ def delete_post(id: int):
         )
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
+
 @app.put("/posts/{id}")
-def update_post(id:int,post:Post):
+def update_post(id: int, post: Post):
     cursor.execute("""""")
