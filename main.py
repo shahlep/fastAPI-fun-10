@@ -7,9 +7,11 @@ app = FastAPI()
 
 
 class Post(BaseModel):
+    id: int
     title: str
     content: str
     published: bool = True
+    created_at:str
 
 
 my_posts = [
