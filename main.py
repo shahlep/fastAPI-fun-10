@@ -21,7 +21,8 @@ try:
         host=Settings.POSTGRESS_SERVER,
         database=Settings.POSTGRESS_DB,
         user=Settings.POSTGRESS_USER,
-        password=Settings.POSTGRESS_PASSWORD
+        password=Settings.POSTGRESS_PASSWORD,
+        cursor_factory=RealDictCursor
     )
 finally:
     pass
