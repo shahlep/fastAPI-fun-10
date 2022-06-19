@@ -109,7 +109,8 @@ def delete_post(id: int):
 def update_post(id: int, post: Post):
     cursor.execute(
         """UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s RETURNING *""",
-        (post.title, post.content, post.published,str(id)))
+        (post.title, post.content, post.published, str(id)),
+    )
     updated_post = cursor.fetchone()
     conn.commit()
 
