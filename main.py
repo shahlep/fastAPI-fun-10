@@ -52,7 +52,8 @@ def create_posts(post: Post):
             post.published,
         ),
     )
-    return {"new_post": my_posts}
+    new_post = cursor.fetchone()
+    return {"new_post": new_post}
 
 
 @app.get("/posts")
