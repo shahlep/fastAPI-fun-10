@@ -1,11 +1,12 @@
-from fastapi import FastAPI, Response, status, HTTPException
+from fastapi import FastAPI, Response, status, HTTPException,Depends
 from typing import Optional
 from pydantic import BaseModel
 from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
-from . import models
-from .database import engine, Base,get_db
+import models
+from database import engine,get_db
+from sqlalchemy.orm import Session
 
 
 app = FastAPI()
@@ -112,3 +113,7 @@ def update_post(id: int, post: Post):
             detail=f"Post with id {id} doesn't exist",
         )
     return {"Updated Post": updated_post}
+
+@app.get("/sqlalchemy")
+def test_sql_alchemy_db_conn(db:Session=Depends(get_db)):
+    return {"status":"success"}
