@@ -2,7 +2,7 @@ from fastapi import FastAPI, Response, status, HTTPException
 from typing import Optional
 from pydantic import BaseModel
 from random import randrange
-from config import settings
+from config.settings import Settings
 import psycopg2
 
 app = FastAPI()
@@ -15,6 +15,15 @@ class Post(BaseModel):
     published: bool = True
     created_at: str
 
+try:
+    conn = psycopg2.connect(
+        host=Settings.POSTGRESS_SERVER,
+        database=Settings.POSTGRESS_DB,
+        user=Settings.POSTGRESS_USER,
+        password=Settings.POSTGRESS_PASSWORD
+    )
+finally:
+    pass
 
 my_posts = [
     {"title": "test title", "content": "test content", "published": False, "id": 1},
