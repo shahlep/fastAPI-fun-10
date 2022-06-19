@@ -11,7 +11,7 @@ class Post(BaseModel):
     title: str
     content: str
     published: bool = True
-    created_at:str
+    created_at: str
 
 
 my_posts = [
