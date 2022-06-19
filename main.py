@@ -117,4 +117,5 @@ def update_post(id: int, post: Post):
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Post with id {id} doesn't exist",
         )
+    return {"Updated Post":updated_post}
 
