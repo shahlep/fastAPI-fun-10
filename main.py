@@ -10,11 +10,9 @@ app = FastAPI()
 
 
 class Post(BaseModel):
-    id: int
     title: str
     content: str
     published: bool = True
-    created_at: str
 
 
 try:
@@ -42,7 +40,7 @@ def index():
     return {"Message": "Hello World"}
 
 
-@app.post("/posts")
+@app.post("/posts",status_code=status.HTTP_201_CREATED)
 def create_posts(post: Post):
     cursor.execute(
         """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
