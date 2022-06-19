@@ -46,9 +46,11 @@ def index():
 def create_posts(post: Post):
     cursor.execute(
         """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s)""",
-        (post.title,
-        post.content,
-        post.published,)
+        (
+            post.title,
+            post.content,
+            post.published,
+        ),
     )
     return {"new_post": my_posts}
 
