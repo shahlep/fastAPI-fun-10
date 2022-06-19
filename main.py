@@ -53,6 +53,7 @@ def create_posts(post: Post):
         ),
     )
     new_post = cursor.fetchone()
+    conn.commit()
     return {"new_post": new_post}
 
 
