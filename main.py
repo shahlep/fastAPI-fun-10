@@ -5,7 +5,7 @@ from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from . import models
-from .database import engine, Base
+from .database import engine, Base,get_db
 
 
 app = FastAPI()
