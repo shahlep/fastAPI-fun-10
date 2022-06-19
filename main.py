@@ -82,7 +82,7 @@ def get_latest_post():
 
 @app.get("/posts/{id}")
 def get_posts_by_id(id: int):
-    cursor.execute("""SELECT * FROM posts WHERE posts.id == id""")
+    cursor.execute("""SELECT * FROM posts WHERE id = 4""")
     post = cursor.fetchone()
     if post is None:
         raise HTTPException(
