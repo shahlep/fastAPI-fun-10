@@ -108,9 +108,8 @@ def delete_post(id: int):
 @app.put("/posts/{id}")
 def update_post(id: int, post: Post):
     cursor.execute(
-        """UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s RETURNING *""",
-        (post.title, post.content, post.published),
-    )
+        """UPDATE posts SET title=%s,content=%s,published=%s RETURNING *""",
+        (post.title, post.content, post.published))
     updated_post = cursor.fetchone()
     conn.commit()
 
