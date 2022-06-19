@@ -7,6 +7,7 @@ from psycopg2.extras import RealDictCursor
 import models
 from database import engine, get_db
 from sqlalchemy.orm import Session
+from models import Post
 
 
 app = FastAPI()
@@ -117,4 +118,5 @@ def update_post(id: int, post: Post):
 
 @app.get("/sqlalchemy")
 def test_sql_alchemy_db_conn(db: Session = Depends(get_db)):
-    return {"status": "success"}
+    posts = db.query(models.Post).all()
+    return {"status": posts}
