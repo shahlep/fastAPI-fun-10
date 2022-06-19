@@ -52,9 +52,9 @@ def create_posts(post: Post):
 
 @app.get("/posts")
 def get_all_posts():
-    posts = cursor.execute("""SELECT * FROM posts""")
-    print(posts)
-    return {"Posts": my_posts}
+    cursor.execute("""SELECT * FROM posts""")
+    posts = cursor.fetchall()
+    return {"Posts": posts}
 
 
 def get_posts(id: int):
