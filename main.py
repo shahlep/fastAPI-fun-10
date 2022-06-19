@@ -1,11 +1,11 @@
-from fastapi import FastAPI, Response, status, HTTPException,Depends
+from fastapi import FastAPI, Response, status, HTTPException, Depends
 from typing import Optional
 from pydantic import BaseModel
 from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import models
-from database import engine,get_db
+from database import engine, get_db
 from sqlalchemy.orm import Session
 
 
@@ -114,6 +114,7 @@ def update_post(id: int, post: Post):
         )
     return {"Updated Post": updated_post}
 
+
 @app.get("/sqlalchemy")
-def test_sql_alchemy_db_conn(db:Session=Depends(get_db)):
-    return {"status":"success"}
+def test_sql_alchemy_db_conn(db: Session = Depends(get_db)):
+    return {"status": "success"}
