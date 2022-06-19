@@ -45,7 +45,7 @@ def index():
 @app.post("/posts")
 def create_posts(post: Post):
     cursor.execute(
-        """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s)""",
+        """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
         (
             post.title,
             post.content,
