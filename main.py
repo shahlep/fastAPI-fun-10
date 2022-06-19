@@ -103,3 +103,7 @@ def delete_post(id: int):
             detail=f"Post with id {id} doesn't exist",
         )
     return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+@app.put("/posts/{id}")
+def update_post(id:int,post:Post):
+    cursor.execute("""""")
