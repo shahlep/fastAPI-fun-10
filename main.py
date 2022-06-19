@@ -62,18 +62,6 @@ def get_all_posts():
     return {"Posts": posts}
 
 
-def get_posts(id: int):
-    for p in my_posts:
-        if p["id"] == id:
-            return p
-
-
-def find_index_post(id: int):
-    for i, p in enumerate(my_posts):
-        if p["id"] == id:
-            return i
-
-
 @app.get("/posts/latest")
 def get_latest_post():
     post = my_posts[len(my_posts) - 1]
