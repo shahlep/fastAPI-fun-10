@@ -44,9 +44,8 @@ def index():
 
 @app.post("/posts")
 def create_posts(post: Post):
-    post_dict = post.dict()
-    post_dict["id"] = randrange(0, 1000)
-    my_posts.append(post_dict)
+    cursor.execute("""INSERT INTO posts (title,content,published) VALUES (%s,%s,%s)""",
+                   post.title,post.content,post.published)
     return {"new_post": my_posts}
 
 
