@@ -107,4 +107,14 @@ def delete_post(id: int):
 
 @app.put("/posts/{id}")
 def update_post(id: int, post: Post):
-    cursor.execute("""""")
+    cursor.execute("""UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s""",
+                   (post.title,post.content,post.published))
+    updated_post = cursor.fetchone()
+    conn.commit()
+
+    if updated_post is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Post with id {id} doesn't exist",
+        )
+
