@@ -24,8 +24,11 @@ try:
         password=Settings.POSTGRESS_PASSWORD,
         cursor_factory=RealDictCursor
     )
-finally:
-    pass
+    cursor = conn.cursor()
+    print("connection to database was successful")
+except Exception as error:
+    print("connection was failed.")
+    print("Error: ",error)
 
 my_posts = [
     {"title": "test title", "content": "test content", "published": False, "id": 1},
