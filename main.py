@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from random import randrange
 from config.settings import Settings
 import psycopg2
+from psycopg2.extras import RealDictCursor
 
 app = FastAPI()
 
