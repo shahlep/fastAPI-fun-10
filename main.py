@@ -47,17 +47,17 @@ def index():
 
 
 @app.post("/posts", status_code=status.HTTP_201_CREATED)
-def create_posts(post: Post,db:Session=Depends(get_db)):
-    #cursor.execute(
-     #   """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
-     #   (
-      #      post.title,
-       #     post.content,
-       #     post.published,
-       # ),
-    #)
-    #new_post = cursor.fetchone()
-    #conn.commit()
+def create_posts(post: Post, db: Session = Depends(get_db)):
+    # cursor.execute(
+    #   """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
+    #   (
+    #      post.title,
+    #     post.content,
+    #     post.published,
+    # ),
+    # )
+    # new_post = cursor.fetchone()
+    # conn.commit()
     new_post = models.Post(**post.dict())
     db.add(new_post)
     db.commit()
@@ -66,24 +66,24 @@ def create_posts(post: Post,db:Session=Depends(get_db)):
 
 
 @app.get("/posts")
-def get_all_posts(db:Session=Depends(get_db)):
-    #cursor.execute("""SELECT * FROM posts""")
-    #posts = cursor.fetchall()
-    posts=db.query(models.Post).all()
+def get_all_posts(db: Session = Depends(get_db)):
+    # cursor.execute("""SELECT * FROM posts""")
+    # posts = cursor.fetchall()
+    posts = db.query(models.Post).all()
     return {"Posts": posts}
 
 
 @app.get("/posts/latest")
-def get_latest_post(db:Session=Depends(get_db)):
-    #post = my_posts[len(my_posts) - 1]
+def get_latest_post(db: Session = Depends(get_db)):
+    # post = my_posts[len(my_posts) - 1]
     post = db.query(models.Post).order_by(sorted(reverse=False))
     return {"detail": post}
 
 
 @app.get("/posts/{id}")
-def get_posts_by_id(id: int,db:Session=Depends(get_db)):
-    #cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
-    #post = cursor.fetchone()
+def get_posts_by_id(id: int, db: Session = Depends(get_db)):
+    # cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
+    # post = cursor.fetchone()
     post = db.query(models.Post).filter(models.Post.id == id).first()
     if post is None:
         raise HTTPException(
@@ -93,10 +93,10 @@ def get_posts_by_id(id: int,db:Session=Depends(get_db)):
 
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_post(id: int,db:Session=Depends(get_db)):
-    #cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """, (str(id)))
-    #deleted_post = cursor.fetchone()
-    #conn.commit()
+def delete_post(id: int, db: Session = Depends(get_db)):
+    # cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """, (str(id)))
+    # deleted_post = cursor.fetchone()
+    # conn.commit()
     post = db.query(models.Post).filter(models.Post.id == id)
     if post.first() is None:
         raise HTTPException(
@@ -110,13 +110,13 @@ def delete_post(id: int,db:Session=Depends(get_db)):
 
 
 @app.put("/posts/{id}")
-def update_post(id: int,updated_post:Post,db:Session=Depends(get_db)):
-    #cursor.execute(
-     #   """UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s RETURNING *""",
-      #  (post.title, post.content, post.published, str(id)),
-    #)
-    #updated_post = cursor.fetchone()
-    #conn.commit()
+def update_post(id: int, updated_post: Post, db: Session = Depends(get_db)):
+    # cursor.execute(
+    #   """UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s RETURNING *""",
+    #  (post.title, post.content, post.published, str(id)),
+    # )
+    # updated_post = cursor.fetchone()
+    # conn.commit()
     post_query = db.query(models.Post).filter(models.Post.id == id)
     post = post_query.first()
 
