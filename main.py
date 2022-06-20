@@ -135,7 +135,7 @@ def update_post(
 )
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     # hashing a password
-    hashed_password =pwd_context.hash(user.password)
+    hashed_password = pwd_context.hash(user.password)
     user.password = hashed_password
 
     new_user = _models.User(**user.dict())
