@@ -7,6 +7,7 @@ import models
 from database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import List
+from passlib.context import CryptContext
 
 
 app = FastAPI()
