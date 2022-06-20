@@ -7,12 +7,12 @@ import models
 from database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import List
-from passlib.context import CryptContext
+
 
 
 app = FastAPI()
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 models.Base.metadata.create_all(bind=engine)
 
