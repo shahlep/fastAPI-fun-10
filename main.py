@@ -9,9 +9,7 @@ from sqlalchemy.orm import Session
 from typing import List
 
 
-
 app = FastAPI()
-
 
 
 models.Base.metadata.create_all(bind=engine)
