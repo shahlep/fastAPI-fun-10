@@ -38,7 +38,7 @@ def index():
     return {"Message": "Hello World"}
 
 
-@app.post("/posts", status_code=status.HTTP_201_CREATED)
+@app.post("/posts", status_code=status.HTTP_201_CREATED,response_model=_schemas.ShowPost)
 def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     # cursor.execute(
     #   """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
@@ -54,7 +54,7 @@ def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
-    return {"new_post": new_post}
+    return new_post
 
 
 @app.get("/posts")
