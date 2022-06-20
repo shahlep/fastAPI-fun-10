@@ -122,7 +122,4 @@ def update_post(id: int, updated_post: _schemas.Post, db: Session = Depends(get_
     return {"Updated Post": post_query.first()}
 
 
-@app.get("/sqlalchemy")
-def test_sql_alchemy_db_conn(db: Session = Depends(get_db)):
-    posts = db.query(_models.Post).all()
-    return {"status": posts}
+
