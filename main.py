@@ -6,6 +6,7 @@ from psycopg2.extras import RealDictCursor
 import models
 from database import engine, get_db
 from sqlalchemy.orm import Session
+from typing import List
 
 
 app = FastAPI()
@@ -59,7 +60,7 @@ def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 
-@app.get("/posts", response_model=_schemas.ShowPost)
+@app.get("/posts", response_model=List[_schemas.ShowPost])
 def get_all_posts(db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts""")
     # posts = cursor.fetchall()
