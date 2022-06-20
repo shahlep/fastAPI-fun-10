@@ -14,9 +14,6 @@ app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
 
-
-
-
 try:
     conn = psycopg2.connect(
         host=Settings.POSTGRESS_SERVER,
