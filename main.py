@@ -12,6 +12,8 @@ from passlib.context import CryptContext
 
 app = FastAPI()
 
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 models.Base.metadata.create_all(bind=engine)
 
 
@@ -132,6 +134,10 @@ def update_post(
     "/users", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser
 )
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
+    # hashing a password
+    hashed_password =pwd_context.hash(user.password)
+    user.password = hashed_password
+
     new_user = _models.User(**user.dict())
     print(new_user)
     db.add(new_user)
