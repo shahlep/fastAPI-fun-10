@@ -102,7 +102,9 @@ def delete_post(id: int, db: Session = Depends(get_db)):
 
 
 @app.put("/posts/{id}")
-def update_post(id: int, updated_post: _schemas.PostCreate, db: Session = Depends(get_db)):
+def update_post(
+    id: int, updated_post: _schemas.PostCreate, db: Session = Depends(get_db)
+):
     # cursor.execute(
     #   """UPDATE posts SET title=%s,content=%s,published=%s WHERE id=%s RETURNING *""",
     #  (post.title, post.content, post.published, str(id)),
@@ -120,6 +122,3 @@ def update_post(id: int, updated_post: _schemas.PostCreate, db: Session = Depend
     post_query.update(updated_post.dict())
     db.commit()
     return {"Updated Post": post_query.first()}
-
-
-
