@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Response, status, HTTPException, Depends
-from typing import Optional
-from pydantic import BaseModel
+from schemas import Post
 from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -15,10 +14,7 @@ app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
 
-class Post(BaseModel):
-    title: str
-    content: str
-    published: bool = True
+
 
 
 try:
