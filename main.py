@@ -59,22 +59,22 @@ def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 
-@app.get("/posts")
+@app.get("/posts",response_model=_schemas.ShowPost)
 def get_all_posts(db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts""")
     # posts = cursor.fetchall()
     posts = db.query(_models.Post).all()
-    return {"Posts": posts}
+    return posts
 
 
-@app.get("/posts/latest")
+@app.get("/posts/latest",response_model=_schemas.ShowPost)
 def get_latest_post(db: Session = Depends(get_db)):
     # post = my_posts[len(my_posts) - 1]
     post = db.query(_models.Post).order_by(_models.Post.id.desc())
-    return {"detail": post}
+    return post
 
 
-@app.get("/posts/{id}")
+@app.get("/posts/{id}",response_model=_schemas.ShowPost)
 def get_posts_by_id(id: int, db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
     # post = cursor.fetchone()
@@ -83,7 +83,7 @@ def get_posts_by_id(id: int, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"post with id {id} not found"
         )
-    return {"Posts": post}
+    return post
 
 
 @app.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
@@ -103,7 +103,7 @@ def delete_post(id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@app.put("/posts/{id}")
+@app.put("/posts/{id}",response_model=_schemas.ShowPost)
 def update_post(
     id: int, updated_post: _schemas.PostCreate, db: Session = Depends(get_db)
 ):
@@ -123,4 +123,4 @@ def update_post(
         )
     post_query.update(updated_post.dict())
     db.commit()
-    return {"Updated Post": post_query.first()}
+    return post_query.first()
