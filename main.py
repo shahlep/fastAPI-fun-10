@@ -76,7 +76,7 @@ def get_all_posts(db: Session = Depends(get_db)):
 @app.get("/posts/latest")
 def get_latest_post(db: Session = Depends(get_db)):
     # post = my_posts[len(my_posts) - 1]
-    post = db.query(models.Post).order_by(sorted(reverse=False))
+    post = db.query(models.Post).order_by(models.Post.id.desc())
     return {"detail": post}
 
 
