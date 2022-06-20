@@ -7,6 +7,7 @@ import models
 from database import engine, get_db
 from sqlalchemy.orm import Session
 from typing import List
+import utils
 
 
 app = FastAPI()
@@ -133,8 +134,8 @@ def update_post(
 )
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     # hashing a password
-    hashed_password = pwd_context.hash(user.password)
-    user.password = hashed_password
+
+    user.password = utils.hash_password(user.password)
 
     new_user = _models.User(**user.dict())
     print(new_user)
