@@ -14,6 +14,7 @@ models.Base.metadata.create_all(bind=engine)
 app.include_router(_users)
 app.include_router(_posts)
 
+
 @app.get("/")
 def index():
     return {"Message": "Hello World"}
