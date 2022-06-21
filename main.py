@@ -145,7 +145,7 @@ def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-@app.get("/users/{id}")
+@app.get("/users/{id}",response_model=_schemas.ShowUser)
 def get_user_by_id(id: int, db: Session = Depends(get_db)):
     user = db.query(_models.User).filter(_models.User.id == id).first()
 
