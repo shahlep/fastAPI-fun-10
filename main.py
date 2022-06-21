@@ -144,6 +144,10 @@ def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
+@app.get("/users",response_model=List[_schemas.ShowUser])
+def get_all_user(db:Session=Depends(get_db)):
+    users = db.query(_models.User).all()
+    return users
 
 @app.get("/users/{id}",response_model=_schemas.ShowUser)
 def get_user_by_id(id: int, db: Session = Depends(get_db)):
