@@ -4,11 +4,13 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/posts"
+)
 
 
 @router.post(
-    "/posts", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowPost
+    "/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowPost
 )
 def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     # cursor.execute(
@@ -28,7 +30,7 @@ def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     return new_post
 
 
-@router.get("/posts", response_model=List[_schemas.ShowPost])
+@router.get("/", response_model=List[_schemas.ShowPost])
 def get_all_posts(db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts""")
     # posts = cursor.fetchall()
@@ -36,14 +38,14 @@ def get_all_posts(db: Session = Depends(get_db)):
     return posts
 
 
-@router.get("/posts/latest", response_model=_schemas.ShowPost)
+@router.get("/latest", response_model=_schemas.ShowPost)
 def get_latest_post(db: Session = Depends(get_db)):
     # post = my_posts[len(my_posts) - 1]
     post = db.query(_models.Post).order_by(_models.Post.id.desc())
     return post
 
 
-@router.get("/posts/{id}", response_model=_schemas.ShowPost)
+@router.get("/{id}", response_model=_schemas.ShowPost)
 def get_posts_by_id(id: int, db: Session = Depends(get_db)):
     # cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
     # post = cursor.fetchone()
@@ -55,7 +57,7 @@ def get_posts_by_id(id: int, db: Session = Depends(get_db)):
     return post
 
 
-@router.delete("/posts/{id}", status_code=status.HTTP_204_NO_CONTENT)
+@router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_post(id: int, db: Session = Depends(get_db)):
     # cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """, (str(id)))
     # deleted_post = cursor.fetchone()
@@ -72,7 +74,7 @@ def delete_post(id: int, db: Session = Depends(get_db)):
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
 
-@router.put("/posts/{id}", response_model=_schemas.ShowPost)
+@router.put("/{id}", response_model=_schemas.ShowPost)
 def update_post(
     id: int, updated_post: _schemas.PostCreate, db: Session = Depends(get_db)
 ):

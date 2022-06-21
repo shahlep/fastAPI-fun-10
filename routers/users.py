@@ -4,11 +4,13 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/users"
+)
 
 
 @router.post(
-    "/users", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser
+    "/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser
 )
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     # hashing a password
@@ -23,13 +25,13 @@ def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     return new_user
 
 
-@router.get("/users", response_model=List[_schemas.ShowUser])
+@router.get("/", response_model=List[_schemas.ShowUser])
 def get_all_user(db: Session = Depends(get_db)):
     users = db.query(_models.User).all()
     return users
 
 
-@router.get("/users/{id}", response_model=_schemas.ShowUser)
+@router.get("/{id}", response_model=_schemas.ShowUser)
 def get_user_by_id(id: int, db: Session = Depends(get_db)):
     user = db.query(_models.User).filter(_models.User.id == id).first()
 
