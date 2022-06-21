@@ -14,19 +14,6 @@ app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
 
-try:
-    conn = psycopg2.connect(
-        host=Settings.POSTGRESS_SERVER,
-        database=Settings.POSTGRESS_DB,
-        user=Settings.POSTGRESS_USER,
-        password=Settings.POSTGRESS_PASSWORD,
-        cursor_factory=RealDictCursor,
-    )
-    cursor = conn.cursor()
-    print("connection to database was successful")
-except Exception as error:
-    print("connection was failed.")
-    print("Error: ", error)
 
 
 @app.get("/")
