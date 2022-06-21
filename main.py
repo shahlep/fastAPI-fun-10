@@ -39,5 +39,3 @@ my_posts = [
 @app.get("/")
 def index():
     return {"Message": "Hello World"}
-
-
