@@ -1,10 +1,11 @@
-from fastapi import APIRouter,status,HTTPException,Depends
-import schemas as _schemas,models as _models,utils
+from fastapi import APIRouter, status, HTTPException, Depends
+import schemas as _schemas, models as _models, utils
 from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
 router = APIRouter()
+
 
 @router.post(
     "/users", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser

@@ -127,5 +127,3 @@ def update_post(
     post_query.update(updated_post.dict())
     db.commit()
     return post_query.first()
-
-
