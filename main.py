@@ -8,7 +8,6 @@ from routers.users import router as _users
 from routers.posts import router as _posts
 
 
-
 app = FastAPI()
 
 
@@ -28,11 +27,6 @@ try:
 except Exception as error:
     print("connection was failed.")
     print("Error: ", error)
-
-my_posts = [
-    {"title": "test title", "content": "test content", "published": False, "id": 1},
-    {"title": "test title2", "content": "test content2", "published": False, "id": 2},
-]
 
 
 @app.get("/")
