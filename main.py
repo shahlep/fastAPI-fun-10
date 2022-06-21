@@ -134,8 +134,8 @@ def update_post(
 )
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     # hashing a password
-
-    user.password = utils.hash_password(user.password)
+    hashed_password = utils.hash_password(user.password)
+    user.password = hashed_password
 
     new_user = _models.User(**user.dict())
     print(new_user)
