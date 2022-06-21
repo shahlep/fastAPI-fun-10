@@ -1,13 +1,12 @@
-from fastapi import FastAPI, Response, status, HTTPException, Depends
-import schemas as _schemas, models as _models
+from fastapi import FastAPI
 from config.settings import Settings
 import psycopg2
 from psycopg2.extras import RealDictCursor
 import models
-from database import engine, get_db
-from sqlalchemy.orm import Session
-from typing import List
-import utils
+from database import engine
+from routers.users import router as _users
+from routers.posts import router as _posts
+
 
 
 app = FastAPI()
