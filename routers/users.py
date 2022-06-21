@@ -4,14 +4,10 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
-router = APIRouter(
-    prefix="/users"
-)
+router = APIRouter(prefix="/users")
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser)
 def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
     # hashing a password
     hashed_password = utils.hash_password(user.password)

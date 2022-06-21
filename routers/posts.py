@@ -4,14 +4,10 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
-router = APIRouter(
-    prefix="/posts"
-)
+router = APIRouter(prefix="/posts")
 
 
-@router.post(
-    "/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowPost
-)
+@router.post("/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowPost)
 def create_posts(post: _schemas.PostCreate, db: Session = Depends(get_db)):
     # cursor.execute(
     #   """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
