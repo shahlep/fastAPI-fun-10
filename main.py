@@ -129,34 +129,3 @@ def update_post(
     return post_query.first()
 
 
-@app.post(
-    "/users", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser
-)
-def create_user(user: _schemas.UserCreate, db: Session = Depends(get_db)):
-    # hashing a password
-    hashed_password = utils.hash_password(user.password)
-    user.password = hashed_password
-
-    new_user = _models.User(**user.dict())
-    print(new_user)
-    db.add(new_user)
-    db.commit()
-    db.refresh(new_user)
-    return new_user
-
-
-@app.get("/users", response_model=List[_schemas.ShowUser])
-def get_all_user(db: Session = Depends(get_db)):
-    users = db.query(_models.User).all()
-    return users
-
-
-@app.get("/users/{id}", response_model=_schemas.ShowUser)
-def get_user_by_id(id: int, db: Session = Depends(get_db)):
-    user = db.query(_models.User).filter(_models.User.id == id).first()
-
-    if user is None:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail=f"user with id {id} not found"
-        )
-    return user
