@@ -11,8 +11,6 @@ app = FastAPI()
 models.Base.metadata.create_all(bind=engine)
 
 
-
-
 @app.get("/")
 def index():
     return {"Message": "Hello World"}
