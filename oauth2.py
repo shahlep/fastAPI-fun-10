@@ -3,6 +3,9 @@ from datetime import datetime, timedelta
 from config.settings import Settings
 import schemas as _schemas
 from fastapi import Depends, status, HTTPException
+from fastapi.security import OAuth2PasswordBearer
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 
 
 def create_access_token(data: dict):
