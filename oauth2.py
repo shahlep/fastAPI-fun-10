@@ -13,5 +13,6 @@ def create_access_token(data: dict):
     )
     return encoded_jwt
 
-def verify_access_token(token:str, credentials_exception):
+
+def verify_access_token(token: str, credentials_exception):
     pass
