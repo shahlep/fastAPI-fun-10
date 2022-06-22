@@ -1,7 +1,7 @@
 from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from config.settings import Settings
-import schemas as _schemas,models as _models
+import schemas as _schemas, models as _models
 from fastapi import Depends, status, HTTPException
 from fastapi.security import OAuth2PasswordBearer
 from database import get_db
@@ -23,9 +23,7 @@ def create_access_token(data: dict):
 
 def verify_access_token(token: str, credentials_exception):
     try:
-        payload = jwt.decode(
-            token, Settings.SECRET_KEY, algorithms=Settings.ALGORITHM
-        )
+        payload = jwt.decode(token, Settings.SECRET_KEY, algorithms=Settings.ALGORITHM)
         id: str = payload.get("user_id")
 
         if id is None:
@@ -36,12 +34,14 @@ def verify_access_token(token: str, credentials_exception):
     return token_data
 
 
-def get_current_user(token: str = Depends(oauth2_scheme),db:Session=Depends(get_db)):
+def get_current_user(
+    token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Failed to validate the credentials",
         headers={"WWW-Authenticate": "Bearer"},
     )
     token = verify_access_token(token, credentials_exception)
-    user = db.query(_models.User).filter(_models.User.id==token.id).first()
+    user = db.query(_models.User).filter(_models.User.id == token.id).first()
     return user
