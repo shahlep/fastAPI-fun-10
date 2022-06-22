@@ -12,3 +12,6 @@ def create_access_token(data: dict):
         to_encode, Settings.SECRET_KEY, algorithm=Settings.ALGORITHM
     )
     return encoded_jwt
+
+def verify_access_token(token:str, credentials_exception):
+    pass
