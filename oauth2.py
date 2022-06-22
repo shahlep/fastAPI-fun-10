@@ -2,6 +2,7 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta
 from config.settings import Settings
 import schemas as _schemas
+from fastapi import Depends,status,HTTPException
 
 
 def create_access_token(data: dict):
@@ -25,3 +26,6 @@ def verify_access_token(token: str, credentials_exception):
         token_data = _schemas.TokenData(id=id)
     except JWTError:
         raise credentials_exception
+
+def get_current_user():
+    pass
