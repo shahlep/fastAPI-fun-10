@@ -36,7 +36,7 @@ def get_all_posts(
 ):
     # cursor.execute("""SELECT * FROM posts""")
     # posts = cursor.fetchall()
-    posts = db.query(_models.Post).all()
+    posts = db.query(_models.Post).filter(_models.Post.owner_id==current_user.id).all()
     return posts
 
 
