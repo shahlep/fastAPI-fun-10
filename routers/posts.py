@@ -11,6 +11,7 @@ router = APIRouter(prefix="/posts", tags=["Posts"])
 def create_posts(
     post: _schemas.PostCreate,
     db: Session = Depends(get_db),
+    current_user: int = Depends(oauth2.get_current_user)
 ):
     # cursor.execute(
     #   """INSERT INTO posts (title,content,published) VALUES (%s,%s,%s) RETURNING *""",
@@ -22,7 +23,7 @@ def create_posts(
     # )
     # new_post = cursor.fetchone()
     # conn.commit()
-    new_post = _models.Post(**post.dict())
+    new_post = _models.Post(owner_id=current_user.id,**post.dict())
     db.add(new_post)
     db.commit()
     db.refresh(new_post)
