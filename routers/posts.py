@@ -74,14 +74,20 @@ def delete_post(
     # cursor.execute("""DELETE FROM posts WHERE id=%s RETURNING * """, (str(id)))
     # deleted_post = cursor.fetchone()
     # conn.commit()
-    post = db.query(_models.Post).filter(_models.Post.id == id)
-    if post.first() is None:
+    post_query = db.query(_models.Post).filter(_models.Post.id == id)
+    post= post_query.first()
+    if post is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Post with id {id} doesn't exist",
         )
+    if post.owner_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Yor are not allowed to delete the post!",
+        )
 
-    post.delete()
+    post_query.delete()
     db.commit()
     return Response(status_code=status.HTTP_204_NO_CONTENT)
 
@@ -99,13 +105,18 @@ def update_post(
     # )
     # updated_post = cursor.fetchone()
     # conn.commit()
-    post_query = db.query(_models.Post).filter(_models.Post.id == id)
+    post_query = db.query(_models.Post).filter(_models.Post.id == id).first()
     post = post_query.first()
 
     if post is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
             detail=f"Post with id {id} doesn't exist",
+        )
+    if post.owner_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Yor are not allowed to delete the post!",
         )
     post_query.update(updated_post.dict())
     db.commit()
