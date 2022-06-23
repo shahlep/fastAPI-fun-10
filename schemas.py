@@ -12,6 +12,7 @@ class PostBase(BaseModel):
 class PostCreate(PostBase):
     pass
 
+
 class ShowUser(BaseModel):
     email: EmailStr
     id: int
@@ -19,6 +20,7 @@ class ShowUser(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class ShowPost(PostBase):
     id: int
@@ -33,9 +35,6 @@ class ShowPost(PostBase):
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
-
-
-
 
 
 class UserLogin(BaseModel):
