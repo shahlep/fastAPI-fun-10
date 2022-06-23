@@ -4,7 +4,7 @@ from database import engine
 from routers.users import router as _users
 from routers.posts import router as _posts
 from routers.auth import router as _auth
-from config.settings import Settings
+
 
 app = FastAPI()
 
