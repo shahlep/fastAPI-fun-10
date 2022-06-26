@@ -14,27 +14,26 @@ def create_vote(
     current_user: int = Depends(oauth2.get_current_user),
 ):
 
-
-        vote_query = db.query(_models.Vote).filter(
-            _models.Vote.post_id == vote.post_id,
-            _models.Vote.user_id == current_user.id,
-        )
-        found_vote = vote_query.first()
-        if vote.dir == 1:
-            if found_vote:
-                raise HTTPException(
-                    status_code=status.HTTP_409_CONFLICT,
-                    detail=f"user with {current_user.id} already voted for post",
-                )
-            new_vote = _models.Vote(post_id=vote.post_id, user_id=current_user.id)
-            db.add(new_vote)
-            db.commit()
-            return {"Message": "Vote added"}
-        else:
-            if not found_vote:
-                raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND, detail="vote doesn't exist"
-                )
-            vote_query.delete()
-            db.commit()
-            return {"Message": "Vote deleted"}
+    vote_query = db.query(_models.Vote).filter(
+        _models.Vote.post_id == vote.post_id,
+        _models.Vote.user_id == current_user.id,
+    )
+    found_vote = vote_query.first()
+    if vote.dir == 1:
+        if found_vote:
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail=f"user with {current_user.id} already voted for post",
+            )
+        new_vote = _models.Vote(post_id=vote.post_id, user_id=current_user.id)
+        db.add(new_vote)
+        db.commit()
+        return {"Message": "Vote added"}
+    else:
+        if not found_vote:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="vote doesn't exist"
+            )
+        vote_query.delete()
+        db.commit()
+        return {"Message": "Vote deleted"}
