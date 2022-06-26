@@ -39,3 +39,6 @@ def create_vote(
             vote_query.delete()
             db.commit()
             return {"Message": "Vote deleted"}
+    else:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                            detail="Post doesn't exist")
