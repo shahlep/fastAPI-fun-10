@@ -25,4 +25,9 @@ def create_vote(
         db.commit()
         return {"Message":"Vote added"}
     else:
-        pass
+        if not found_vote:
+            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
+                                detail="vote doesn't exist")
+        vote_query.delete()
+        db.commit()
+        return {"Message": "Vote deleted"}
