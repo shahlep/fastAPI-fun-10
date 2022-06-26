@@ -13,4 +13,7 @@ def create_vote(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-    pass
+    if vote.dir == 1:
+        pass
+    else:
+        pass
