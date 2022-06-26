@@ -13,9 +13,8 @@ def create_vote(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-    post_query = db.query(_models.Vote).filter(_models.Vote.post_id == _models.Post.id)
-    found_post = post_query.first()
-    if found_post:
+
+
         vote_query = db.query(_models.Vote).filter(
             _models.Vote.post_id == vote.post_id,
             _models.Vote.user_id == current_user.id,
@@ -39,6 +38,3 @@ def create_vote(
             vote_query.delete()
             db.commit()
             return {"Message": "Vote deleted"}
-    else:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="Post doesn't exist")
