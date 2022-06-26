@@ -17,6 +17,12 @@ def create_vote(
         _models.Vote.post_id==vote.post_id,_models.Vote.user_id==current_user.id)
     found_vote = vote_query.first()
     if vote.dir == 1:
-        pass
+        if found_vote:
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT,
+                                detail=f"user with {current_user.id} already voted for post")
+        new_vote = _models.Vote(post_id=vote.post_id,user_id=current_user.id)
+        db.add(new_vote)
+        db.commit()
+        return {"Message":"Vote added"}
     else:
         pass
