@@ -48,7 +48,7 @@ def get_all_posts(
     )
     results = db.query(_models.Post).join(
         _models.Vote, _models.Post.id == _models.Vote.post_id, isouter=True
-    )
+    ).group_by(_models.Post.id)
     print(results)
     return posts
 
