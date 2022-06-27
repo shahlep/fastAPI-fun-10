@@ -38,3 +38,4 @@ class Vote(Base):
     post_id = Column(
         Integer, ForeignKey("posts.id", ondelete="CASCADE"), primary_key=True
     )
+

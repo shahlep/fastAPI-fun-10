@@ -33,9 +33,7 @@ class ShowPost(PostBase):
 
 
 class ShowPostVote(PostBase):
-    id: int
-    created_at: datetime
-    owner_id: int
+    Post:ShowPost
     vote: int
 
     class Config:
