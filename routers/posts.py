@@ -49,7 +49,7 @@ def get_all_posts(
     results = (
         db.query(_models.Post, func.count(_models.Vote.post_id).label("votes"))
         .join(_models.Vote, _models.Post.id == _models.Vote.post_id, isouter=True)
-        .group_by(_models.Post.id)
+        .group_by(_models.Post.id).all()
     )
     print(results)
     return posts
