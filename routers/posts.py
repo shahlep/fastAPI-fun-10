@@ -46,7 +46,7 @@ def get_all_posts(
         .limit(limit)
         .all()
     )
-    results = db.query(_models.Post).join(
+    results = db.query(_models.Post,func.count(_models.Vote.post_id)).join(
         _models.Vote, _models.Post.id == _models.Vote.post_id, isouter=True
     ).group_by(_models.Post.id)
     print(results)
