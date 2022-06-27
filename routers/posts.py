@@ -31,7 +31,8 @@ def create_posts(
     return new_post
 
 
-@router.get("/", response_model=List[_schemas.ShowPost])
+#@router.get("/", response_model=List[_schemas.ShowPost])
+@router.get("/")
 def get_all_posts(
     limit: int = None,
     search: Optional[str] = "",
