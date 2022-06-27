@@ -52,8 +52,8 @@ def get_all_posts(
         .join(_models.Vote, _models.Post.id == _models.Vote.post_id, isouter=True)
         .group_by(_models.Post.id).all()
     )
-    print(results)
-    return posts
+    #print(results)
+    return results
 
 
 @router.get("/latest", response_model=_schemas.ShowPost)
