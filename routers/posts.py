@@ -32,7 +32,7 @@ def create_posts(
 
 
 # @router.get("/", response_model=List[_schemas.ShowPost])
-@router.get("/")
+@router.get("/",response_model=List[_schemas.ShowPostVote])
 def get_all_posts(
     limit: int = None,
     search: Optional[str] = "",
@@ -53,7 +53,6 @@ def get_all_posts(
         .group_by(_models.Post.id)
         .all()
     )
-    print(results)
     return results
 
 
