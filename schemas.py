@@ -32,9 +32,9 @@ class ShowPost(PostBase):
         orm_mode = True
 
 
-class ShowPostVote(PostBase):
+class ShowPostVote(BaseModel):
     Post: ShowPost
-    vote: int
+    votes: int
 
     class Config:
         orm_mode = True
