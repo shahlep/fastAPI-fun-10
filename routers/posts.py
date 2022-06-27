@@ -31,7 +31,7 @@ def create_posts(
     return new_post
 
 
-#@router.get("/", response_model=List[_schemas.ShowPost])
+# @router.get("/", response_model=List[_schemas.ShowPost])
 @router.get("/")
 def get_all_posts(
     limit: int = None,
@@ -49,8 +49,9 @@ def get_all_posts(
     )
     results = (
         db.query(_models.Post, func.count(_models.Vote.post_id).label("votes"))
-        .join(_models.Vote, _models.Vote.post_id == _models.Post.id , isouter=True)
-        .group_by(_models.Post.id).all()
+        .join(_models.Vote, _models.Vote.post_id == _models.Post.id, isouter=True)
+        .group_by(_models.Post.id)
+        .all()
     )
     print(results)
     return results

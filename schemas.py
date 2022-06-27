@@ -33,7 +33,7 @@ class ShowPost(PostBase):
 
 
 class ShowPostVote(PostBase):
-    Post:ShowPost
+    Post: ShowPost
     vote: int
 
     class Config:
