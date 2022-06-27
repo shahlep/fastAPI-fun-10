@@ -74,8 +74,14 @@ def get_posts_by_id(
 ):
     # cursor.execute("""SELECT * FROM posts WHERE id = %s""", (str(id)))
     # post = cursor.fetchone()
-   # post = db.query(_models.Post).filter(_models.Post.id == id).first()
-    post = db.query(_models.Post, func.count(_models.Vote.post_id).label("votes")).join(_models.Vote, _models.Vote.post_id == _models.Post.id, isouter=True).group_by(_models.Post.id).filter(_models.Post.id == id).first()
+    # post = db.query(_models.Post).filter(_models.Post.id == id).first()
+    post = (
+        db.query(_models.Post, func.count(_models.Vote.post_id).label("votes"))
+        .join(_models.Vote, _models.Vote.post_id == _models.Post.id, isouter=True)
+        .group_by(_models.Post.id)
+        .filter(_models.Post.id == id)
+        .first()
+    )
     if post is None:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND, detail=f"post with id {id} not found"
