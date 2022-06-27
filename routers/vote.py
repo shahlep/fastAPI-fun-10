@@ -13,10 +13,12 @@ def create_vote(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user),
 ):
-    post = db.query(_models.Post).filter(_models.Post.id==vote.post_id).first()
+    post = db.query(_models.Post).filter(_models.Post.id == vote.post_id).first()
     if not post:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"post with id: {vote.post_id} doesn't exist")
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"post with id: {vote.post_id} doesn't exist",
+        )
     vote_query = db.query(_models.Vote).filter(
         _models.Vote.post_id == vote.post_id,
         _models.Vote.user_id == current_user.id,
