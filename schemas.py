@@ -32,6 +32,16 @@ class ShowPost(PostBase):
         orm_mode = True
 
 
+class ShowPostVote(PostBase):
+    id: int
+    created_at: datetime
+    owner_id: int
+    vote: int
+
+    class Config:
+        orm_mode = True
+
+
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
