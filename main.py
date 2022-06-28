@@ -9,7 +9,7 @@ from routers.vote import router as _vote
 app = FastAPI()
 
 
-models.Base.metadata.create_all(bind=engine)
+#models.Base.metadata.create_all(bind=engine)
 
 
 app.include_router(_users)
