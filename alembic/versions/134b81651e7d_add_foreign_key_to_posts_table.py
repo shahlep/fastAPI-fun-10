@@ -27,5 +27,6 @@ def upgrade() -> None:
 
 
 def downgrade() -> None:
+    op.drop_constraint("posts_users_fk","posts")
     op.drop_column("posts","owner_id")
     pass
