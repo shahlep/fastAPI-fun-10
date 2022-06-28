@@ -22,8 +22,8 @@ def upgrade() -> None:
         "posts_users_fk",
         source_table="posts",
         referent_table="users",
-        local_cols="owner_id",
-        remote_cols="id",
+        local_cols=["owner_id"],
+        remote_cols=["id"],
         ondelete="CASCADE",
     )
     pass
