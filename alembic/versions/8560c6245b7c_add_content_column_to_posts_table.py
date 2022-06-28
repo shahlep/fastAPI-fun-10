@@ -9,15 +9,14 @@ from alembic import op
 import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
-revision = '8560c6245b7c'
-down_revision = 'da205554e7dd'
+revision = "8560c6245b7c"
+down_revision = "da205554e7dd"
 branch_labels = None
 depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column("posts",
-                  sa.Column("content", sa.String(20), nullable=False))
+    op.add_column("posts", sa.Column("content", sa.String(20), nullable=False))
     pass
 
 
