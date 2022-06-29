@@ -7,7 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-#https://fastapi.tiangolo.com/tutorial/cors/
+# https://fastapi.tiangolo.com/tutorial/cors/
 
 origins = ["*"]
 
@@ -18,7 +18,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 
 app.include_router(_users)
