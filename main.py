@@ -1,6 +1,4 @@
 from fastapi import FastAPI
-import models
-from database import engine
 from routers.users import router as _users
 from routers.posts import router as _posts
 from routers.auth import router as _auth
@@ -9,10 +7,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-
-#models.Base.metadata.create_all(bind=engine)
-
 #https://fastapi.tiangolo.com/tutorial/cors/
+
 origins = ["*"]
 
 app.add_middleware(
