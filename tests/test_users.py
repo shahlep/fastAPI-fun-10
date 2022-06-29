@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 from main import app
+from schemas import ShowUser
 
 client = TestClient(app)
 
@@ -14,5 +15,6 @@ def test_create_user():
     response = client.post(
         "/users/", json={"email": "test123@example.com", "password": "password123"}
     )
+    new_user = ShowUser(**response.json())
     assert response.status_code == 201
-    assert response.json().get("email") == "test123@example.com"
+    assert new_user.email == "test123@example.com"
