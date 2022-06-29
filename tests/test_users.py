@@ -24,9 +24,8 @@ def get_db():
         db.close()
 
 
-
-
 client = TestClient(app)
+
 
 def test_read_main():
     response = client.get("/")
