@@ -4,5 +4,4 @@ venv
 __pycache__
 .env
 pgadapter.py
-tests/calculations.py
-tests/test_add.py
+
