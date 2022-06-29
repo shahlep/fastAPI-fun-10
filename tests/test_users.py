@@ -11,8 +11,8 @@ def test_read_main():
 
 
 def test_create_user():
-    response = client.post("/users/",json={"email":"test123@example.com",
-                                           "password":"password123"})
-    assert response.status_code ==201
+    response = client.post(
+        "/users/", json={"email": "test123@example.com", "password": "password123"}
+    )
+    assert response.status_code == 201
     assert response.json().get("email") == "test123@example.com"
-
