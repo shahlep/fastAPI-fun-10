@@ -1,9 +1,32 @@
 from fastapi.testclient import TestClient
 from main import app
 from schemas import ShowUser
+from config.settings import Settings
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+
+
+SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
+
+engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
+SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+
+Base = declarative_base()
+
+# Dependency
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+
 
 client = TestClient(app)
-
 
 def test_read_main():
     response = client.get("/")
