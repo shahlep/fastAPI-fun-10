@@ -5,6 +5,7 @@ from config.settings import Settings
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from database import get_db
 
 
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
@@ -15,6 +16,8 @@ Test_SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 Base = declarative_base()
 
+Base.metadata.create_all(bind=engine)
+
 # Dependency
 def override_get_db():
     db = Test_SessionLocal()
@@ -23,6 +26,7 @@ def override_get_db():
     finally:
         db.close()
 
+app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app)
 
