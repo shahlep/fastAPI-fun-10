@@ -4,7 +4,7 @@ from schemas import ShowUser
 from config.settings import Settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database import get_db,Base
+from database import get_db, Base
 
 
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
