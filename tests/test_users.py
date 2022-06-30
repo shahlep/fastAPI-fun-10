@@ -5,6 +5,7 @@ from config.settings import Settings
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database import get_db, Base
+from pytest import fixture
 
 
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
@@ -26,7 +27,7 @@ def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
-
+@fixture
 def client():
     return TestClient(app)
 
