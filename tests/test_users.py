@@ -30,7 +30,7 @@ app.dependency_overrides[get_db] = override_get_db
 
 @fixture
 def client():
-    return TestClient(app)
+    yield TestClient(app)
 
 
 def test_read_main(client):
