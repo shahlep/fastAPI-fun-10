@@ -7,7 +7,6 @@ from sqlalchemy.orm import sessionmaker
 from database import get_db, Base
 
 
-
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
@@ -28,9 +27,9 @@ def override_get_db():
 app.dependency_overrides[get_db] = override_get_db
 
 
-
 def client():
     return TestClient(app)
+
 
 def test_read_main(client):
     response = client.get("/")
