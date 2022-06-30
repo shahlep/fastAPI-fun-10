@@ -11,13 +11,13 @@ SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
+Test_SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
 Base = declarative_base()
 
 # Dependency
-def get_db():
-    db = SessionLocal()
+def override_get_db():
+    db = Test_SessionLocal()
     try:
         yield db
     finally:
