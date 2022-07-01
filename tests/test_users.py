@@ -1,5 +1,10 @@
 from schemas import ShowUser
 from .database import client, session
+from pytest import fixture
+
+@fixture(scope="function")
+def test_user(client,session):
+    pass
 
 
 def test_read_main(client):
