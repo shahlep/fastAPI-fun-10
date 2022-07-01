@@ -1,5 +1,6 @@
 from schemas import ShowUser
-from .database import client,session
+from .database import client, session
+
 
 def test_read_main(client):
     response = client.get("/")
