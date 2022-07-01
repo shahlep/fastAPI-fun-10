@@ -4,7 +4,10 @@ from sqlalchemy.orm import Session
 from database import get_db
 from typing import List
 
-router = APIRouter(prefix="/users", tags=["Users"])
+router = APIRouter(
+    prefix="/users",
+    tags=["Users"]
+)
 
 
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=_schemas.ShowUser)
