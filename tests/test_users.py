@@ -6,8 +6,8 @@ from pytest import fixture
 @fixture(scope="function")
 def test_user(client, session):
     user_data = {
-        "email":"test123@example.com",
-        "password":"password123",
+        "email": "test123@example.com",
+        "password": "password123",
     }
 
 
