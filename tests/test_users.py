@@ -32,10 +32,21 @@ app.dependency_overrides[get_db] = override_get_db
 def session():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
+    db = Test_SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 @fixture
 def client(session):
+    def override_get_db():
+        try:
+            yield session
+        finally:
+            session.close()
+
     yield TestClient(app)
 
 
