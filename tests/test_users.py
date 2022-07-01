@@ -5,7 +5,10 @@ from pytest import fixture
 
 @fixture(scope="function")
 def test_user(client, session):
-    pass
+    user_data = {
+        "email":"test123@example.com",
+        "password":"password123",
+    }
 
 
 def test_read_main(client):
