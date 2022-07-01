@@ -9,7 +9,7 @@ def test_user(client):
         "email": "test123@example.com",
         "password": "password123",
     }
-    response = client.post("/users/",json=user_data)
+    response = client.post("/users/", json=user_data)
     assert response.status_code == 201
     new_user = response.json()
     new_user["password"] = user_data["password"]
@@ -31,8 +31,9 @@ def test_create_user(client):
     assert new_user.email == "test123@example.com"
 
 
-def test_login_user(client,test_user):
+def test_login_user(client, test_user):
     response = client.post(
-        "/login", data={"username": test_user['email'], "password": test_user['password']}
+        "/login",
+        data={"username": test_user["email"], "password": test_user["password"]},
     )
     assert response.status_code == 200
