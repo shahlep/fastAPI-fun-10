@@ -17,15 +17,6 @@ Test_SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 Base.metadata.create_all(bind=engine)
 
 # Dependency
-def override_get_db():
-    db = Test_SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
-
-
-app.dependency_overrides[get_db] = override_get_db
 
 
 @fixture
