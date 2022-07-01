@@ -15,3 +15,6 @@ def test_create_user(client):
     new_user = ShowUser(**response.json())
     assert response.status_code == 201
     assert new_user.email == "test123@example.com"
+
+def test_login_user(client):
+    pass
