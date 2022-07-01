@@ -17,4 +17,6 @@ def test_create_user(client):
     assert new_user.email == "test123@example.com"
 
 def test_login_user(client):
-    pass
+    response = client.post(
+        "/login", json={"email": "test123@example.com", "password": "password123"}
+    )
