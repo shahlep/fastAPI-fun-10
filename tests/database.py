@@ -17,7 +17,7 @@ Test_SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 # Dependency
 
 
-@fixture
+@fixture(scope="module")
 def session():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
@@ -28,7 +28,7 @@ def session():
         db.close()
 
 
-@fixture
+@fixture(scope="module")
 def client(session):
     def override_get_db():
         try:
