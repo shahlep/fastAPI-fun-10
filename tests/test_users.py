@@ -4,11 +4,16 @@ from pytest import fixture
 
 
 @fixture(scope="function")
-def test_user(client, session):
+def test_user(client):
     user_data = {
         "email": "test123@example.com",
         "password": "password123",
     }
+    response = client.post("/users/",json=user_data)
+    assert response.status_code == 201
+    new_user = response.json()
+    new_user["password"] = user_data["password"]
+    return new_user
 
 
 def test_read_main(client):
@@ -26,8 +31,8 @@ def test_create_user(client):
     assert new_user.email == "test123@example.com"
 
 
-def test_login_user(client):
+def test_login_user(client,test_user):
     response = client.post(
-        "/login", data={"username": "test123@example.com", "password": "password123"}
+        "/login", data={"username": test_user['email'], "password": test_user['password']}
     )
     assert response.status_code == 200
