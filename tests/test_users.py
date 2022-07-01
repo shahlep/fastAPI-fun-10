@@ -2,8 +2,9 @@ from schemas import ShowUser
 from .database import client, session
 from pytest import fixture
 
+
 @fixture(scope="function")
-def test_user(client,session):
+def test_user(client, session):
     pass
 
 
