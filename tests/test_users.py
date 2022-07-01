@@ -21,5 +21,4 @@ def test_login_user(client):
     response = client.post(
         "/login", data={"username": "test123@example.com", "password": "password123"}
     )
-    print(response.json())
     assert response.status_code == 200
