@@ -14,7 +14,6 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
 Test_SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
 
-Base.metadata.create_all(bind=engine)
 
 # Dependency
 
