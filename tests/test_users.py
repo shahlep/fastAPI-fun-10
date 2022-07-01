@@ -27,10 +27,12 @@ def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
+
 @fixture
 def session():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
+
 
 @fixture
 def client(session):
