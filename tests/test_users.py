@@ -38,4 +38,6 @@ def test_incorrect_login_user(client, test_user):
         "/login",
         data={"username": test_user["email"], "password": "wrongpassword"},
     )
+
     assert response.status_code == 403
+    assert response.json().get('detail') == 'Invalid Credentials!'
