@@ -1,4 +1,4 @@
-from schemas import ShowUser
+from schemas import ShowUser, Token
 
 
 def test_read_main(client):
