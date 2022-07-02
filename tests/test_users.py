@@ -1,6 +1,7 @@
 from schemas import ShowUser, Token
 from jose import jwt
 from config.settings import Settings
+from pytest import mark
 
 
 def test_read_main(client):
@@ -32,7 +33,13 @@ def test_login_user(client, test_user):
     assert login_response.token_type == "bearer"
     assert response.status_code == 200
 
-
+@mark.parametrize("email,password,status_code",[
+    ("wrong@exmplae.com","password123",403),
+    ("test123@example.com","wrongpassowrd",403),
+    ("wrong@example.com","wrongpassword",403),
+    (None,"password123",422),
+    ("test123@example.com",None,422)
+])
 def test_incorrect_login_user(client, test_user):
     response = client.post(
         "/login",
