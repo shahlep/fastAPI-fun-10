@@ -40,4 +40,4 @@ def test_incorrect_login_user(client, test_user):
     )
 
     assert response.status_code == 403
-    assert response.json().get('detail') == 'Invalid Credentials!'
+    assert response.json().get("detail") == "Invalid Credentials!"
