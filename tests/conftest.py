@@ -57,3 +57,5 @@ def test_user(client):
 @fixture(scope="function")
 def token(test_user):
     return create_access_token({"user_id": test_user["id"]})
+def authorized_client(client,token):
+    pass
