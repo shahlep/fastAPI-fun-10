@@ -62,6 +62,6 @@ def token(test_user):
 def authorized_client(client, token):
     client.headers = {
         **client.headers,
-        "Authorization":f"bearer {token}",
+        "Authorization": f"bearer {token}",
     }
     return client
