@@ -33,18 +33,22 @@ def test_login_user(client, test_user):
     assert login_response.token_type == "bearer"
     assert response.status_code == 200
 
-@mark.parametrize("email,password,status_code",[
-    ("wrong@exmplae.com","password123",403),
-    ("test123@example.com","wrongpassowrd",403),
-    ("wrong@example.com","wrongpassword",403),
-    (None,"password123",422),
-    ("test123@example.com",None,422)
-])
-def test_incorrect_login_user(client, email,password,status_code):
+
+@mark.parametrize(
+    "email,password,status_code",
+    [
+        ("wrong@exmplae.com", "password123", 403),
+        ("test123@example.com", "wrongpassowrd", 403),
+        ("wrong@example.com", "wrongpassword", 403),
+        (None, "password123", 422),
+        ("test123@example.com", None, 422),
+    ],
+)
+def test_incorrect_login_user(client, email, password, status_code):
     response = client.post(
         "/login",
         data={"username": email, "password": password},
     )
 
     assert response.status_code == status_code
-    #assert response.json().get("detail") == "Invalid Credentials!"
+    # assert response.json().get("detail") == "Invalid Credentials!"
