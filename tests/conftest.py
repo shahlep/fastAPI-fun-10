@@ -60,4 +60,8 @@ def token(test_user):
 
 
 def authorized_client(client, token):
-    pass
+    client.headers = {
+        **client.headers,
+        "Authorization":f"bearer {token}",
+    }
+    return client
