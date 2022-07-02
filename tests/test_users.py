@@ -25,5 +25,6 @@ def test_login_user(client, test_user):
     )
     login_response = Token(**response.json())
     payload = jwt.decode(login_response.access_token, Settings.SECRET_KEY, algorithms=Settings.ALGORITHM)
-    id: str = payload.get("user_id")
+    id = payload.get("user_id")
+    assert id == test_user["id"]
     assert response.status_code == 200
