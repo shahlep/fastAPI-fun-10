@@ -40,11 +40,11 @@ def test_login_user(client, test_user):
     (None,"password123",422),
     ("test123@example.com",None,422)
 ])
-def test_incorrect_login_user(client, test_user):
+def test_incorrect_login_user(client, email,password,status_code):
     response = client.post(
         "/login",
-        data={"username": test_user["email"], "password": "wrongpassword"},
+        data={"username": email, "password": password},
     )
 
-    assert response.status_code == 403
-    assert response.json().get("detail") == "Invalid Credentials!"
+    assert response.status_code == status_code
+    #assert response.json().get("detail") == "Invalid Credentials!"
