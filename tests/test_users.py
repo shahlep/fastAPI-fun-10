@@ -1,4 +1,6 @@
 from schemas import ShowUser, Token
+from jose import jwt
+from config.settings import Settings
 
 
 def test_read_main(client):
@@ -21,4 +23,7 @@ def test_login_user(client, test_user):
         "/login",
         data={"username": test_user["email"], "password": test_user["password"]},
     )
+    login_response = Token(**response.json())
+    payload = jwt.decode(token, Settings.SECRET_KEY, algorithms=Settings.ALGORITHM)
+    id: str = payload.get("user_id")
     assert response.status_code == 200
