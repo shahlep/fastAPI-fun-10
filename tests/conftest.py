@@ -5,6 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from database import get_db, Base
 from pytest import fixture
+from oauth2 import create_access_token
 
 
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
@@ -55,4 +56,4 @@ def test_user(client):
 
 @fixture(scope="function")
 def token(test_user):
-    pass
+    return create_access_token({"user_id":test_user["id"]})
