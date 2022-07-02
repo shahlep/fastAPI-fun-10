@@ -51,3 +51,7 @@ def test_user(client):
     new_user = response.json()
     new_user["password"] = user_data["password"]
     return new_user
+
+@fixture(scope="function")
+def token(test_user):
+    pass
