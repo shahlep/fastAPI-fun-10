@@ -42,7 +42,7 @@ def test_login_user(client, test_user):
         ("wrong@example.com", "wrongpassword", 403),
         (None, "password123", 422),
         ("test123@example.com", None, 422),
-        (None,None,422)
+        (None, None, 422),
     ],
 )
 def test_incorrect_login_user(client, email, password, status_code):
