@@ -80,4 +80,5 @@ def test_posts(test_user, session):
         {"title": "2nd title", "content": "2nd content", "owner_id": test_user["id"]},
         {"title": "3rd title", "content": "3rd content", "owner_id": test_user["id"]},
     ]
-    pass
+    def create_post_model(post):
+        return models.Post(**post)
