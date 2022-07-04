@@ -1,4 +1,5 @@
-def test_create_a_post():
+def test_create_a_post(authorized_client):
+    response = authorized_client.post()
     pass
 
 
