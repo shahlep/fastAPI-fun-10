@@ -70,4 +70,5 @@ def authorized_client(client, token):
 
 @fixture(scope="function")
 def test_posts(test_user, session):
+    posts_data =[]
     pass
