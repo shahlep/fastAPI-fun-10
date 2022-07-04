@@ -83,8 +83,9 @@ def test_posts(test_user, session):
 
     def create_post_model(post):
         return models.Post(**post)
-    #map to post model
-    post_map = map(create_post_model,posts_data)
 
-    #to list
+    # map to post model
+    post_map = map(create_post_model, posts_data)
+
+    # to list
     posts = list(post_map)
