@@ -89,3 +89,9 @@ def test_posts(test_user, session):
 
     # to list
     posts = list(post_map)
+
+    session.all_all(posts)
+
+    session.commit()
+
+    session.query(models.Post).all()
