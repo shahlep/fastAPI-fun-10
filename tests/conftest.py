@@ -70,17 +70,13 @@ def authorized_client(client, token):
 
 @fixture(scope="function")
 def test_posts(test_user, session):
-    posts_data =[{
-        "title":"first title",
-    "content":"first content",
-    "owner_id":test_user['id']},
+    posts_data = [
         {
-            "title": "2nd title",
-            "content": "2nd content",
-            "owner_id": test_user['id']},
-        {
-            "title": "3rd title",
-            "content": "3rd content",
-            "owner_id": test_user['id']}
+            "title": "first title",
+            "content": "first content",
+            "owner_id": test_user["id"],
+        },
+        {"title": "2nd title", "content": "2nd content", "owner_id": test_user["id"]},
+        {"title": "3rd title", "content": "3rd content", "owner_id": test_user["id"]},
     ]
     pass
