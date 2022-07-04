@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from database import get_db, Base
 from pytest import fixture
 from oauth2 import create_access_token
+import models
 
 
 SQLALCHEMY_DATABASE_URL = Settings.TEST_DATABASE_URL
