@@ -66,3 +66,7 @@ def authorized_client(client, token):
         "Authorization": f"bearer {token}",
     }
     return client
+
+@fixture(scope="function")
+def test_posts(test_user,session):
+    pass
