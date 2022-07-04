@@ -67,6 +67,7 @@ def authorized_client(client, token):
     }
     return client
 
+
 @fixture(scope="function")
-def test_posts(test_user,session):
+def test_posts(test_user, session):
     pass
