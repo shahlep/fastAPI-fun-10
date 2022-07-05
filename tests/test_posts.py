@@ -16,4 +16,6 @@ def test_all_posts(authorized_client, test_posts):
 
 
 def test_unauthorized_user_get_all_posts(client, test_posts):
-    pass
+    response = client.get("/posts/")
+
+    assert response.status_code == 401
