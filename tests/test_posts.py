@@ -5,7 +5,7 @@ def test_all_posts(authorized_client, test_posts):
     response = authorized_client.get("/posts/")
     # print(response.json())
     def validate(post):
-        return _schemas.ShowPostVote(post)
+        return _schemas.ShowPostVote(**post)
 
     post_map = map(validate, response.json())
     post_list = list(post_map)
