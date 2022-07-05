@@ -32,6 +32,7 @@ def test_authorized_user_get_one_post(authorized_client, test_posts):
 
     assert response.status_code == 200
 
+
 def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/123")
 
