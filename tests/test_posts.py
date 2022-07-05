@@ -64,4 +64,4 @@ def test_create_post_by_authorized_user(
     assert created_post.title == title
     assert created_post.content == content
     assert created_post.published == published
-    assert created_post.owner_id == test_user['id']
+    assert created_post.owner_id == test_user["id"]
