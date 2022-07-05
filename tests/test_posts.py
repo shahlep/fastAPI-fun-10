@@ -58,3 +58,5 @@ def test_create_post_by_authorized_user(
     response = authorized_client.post(
         "/posts/", json={"title": title, "content": content, "published": published}
     )
+    post = _schemas.ShowPostVote(**response.json())
+    assert response.status_code == 201
