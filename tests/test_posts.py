@@ -3,7 +3,7 @@ import schemas as _schemas
 
 def test_all_posts(authorized_client, test_posts):
     response = authorized_client.get("/posts/")
-    #print(response.json())
+    # print(response.json())
     def validate(post):
         return _schemas.ShowPostVote(post)
 
