@@ -67,7 +67,7 @@ def test_create_post_by_authorized_user(
     assert created_post.owner_id == test_user["id"]
 
 
-def test_create_post_with_deafult_published_by_authorized_user(
+def test_create_post_with_default_published_by_authorized_user(
     authorized_client, test_user
 ):
     response = authorized_client.post(
