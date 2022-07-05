@@ -30,7 +30,7 @@ def test_unauthorized_user_get_one_post(client, test_posts):
 
 def test_authorized_user_get_one_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/{test_posts[0].id}")
-    # print(response.json())
+
     post = _schemas.ShowPostVote(**response.json())
     assert response.status_code == 200
     assert post.Post.id == test_posts[0].id
@@ -60,7 +60,6 @@ def test_create_post_by_authorized_user(
     )
     created_post = _schemas.PostCreate(**response.json())
     assert response.status_code == 201
-    # print(response.json())
 
     assert created_post.title == title
     assert created_post.content == content
