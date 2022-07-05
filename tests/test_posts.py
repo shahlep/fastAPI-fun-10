@@ -53,7 +53,7 @@ def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
     ],
 )
 def test_create_post_by_authorized_user(
-    authorized_client, test_user, test_posts, title, content, published
+    authorized_client, test_user, title, content, published
 ):
     response = authorized_client.post(
         "/posts/", json={"title": title, "content": content, "published": published}
