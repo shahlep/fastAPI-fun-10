@@ -4,7 +4,7 @@ from pytest import mark
 
 def test_all_posts(authorized_client, test_posts):
     response = authorized_client.get("/posts/")
-    # print(response.json())
+
     def validate(post):
         return _schemas.ShowPostVote(**post)
 
@@ -58,9 +58,10 @@ def test_create_post_by_authorized_user(
     response = authorized_client.post(
         "/posts/", json={"title": title, "content": content, "published": published}
     )
-    created_post = _schemas.PostCreate(**response.json())
+    created_post = _schemas.ShowPost(**response.json())
     assert response.status_code == 201
 
     assert created_post.title == title
     assert created_post.content == content
     assert created_post.published == published
+    assert created_post.owner_id == test_user['id']
