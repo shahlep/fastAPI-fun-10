@@ -29,8 +29,12 @@ def test_unauthorized_user_get_one_post(client, test_posts):
 
 def test_authorized_user_get_one_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/{test_posts[0].id}")
-
+    #print(response.json())
+    post = _schemas.ShowPostVote(**response.json())
     assert response.status_code == 200
+    assert post.Post.id == test_posts[0].id
+    assert post.Post.title == "first title"
+    assert post.Post.content == "first content"
 
 
 def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
