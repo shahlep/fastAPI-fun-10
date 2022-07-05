@@ -73,19 +73,16 @@ def authorized_client(client, token):
 def test_posts(test_user, session):
     posts_data = [
         {
-            "id": 1,
             "title": "first title",
             "content": "first content",
             "owner_id": test_user["id"],
         },
         {
-            "id": 2,
             "title": "2nd title",
             "content": "2nd content",
             "owner_id": test_user["id"],
         },
         {
-            "id": 3,
             "title": "3rd title",
             "content": "3rd content",
             "owner_id": test_user["id"],
