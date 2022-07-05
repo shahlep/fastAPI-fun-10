@@ -1,4 +1,5 @@
 import schemas as _schemas
+from pytest import mark
 
 
 def test_all_posts(authorized_client, test_posts):
@@ -42,7 +43,11 @@ def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
 
     assert response.status_code == 404
 
-
+@mark.parametrize("title,content,published",[
+    ("first title","first content",True),
+    ("2nd title", "2nd content", False),
+    ("3rd title", "3rd content", True),
+])
 def test_create_post_by_authorized_user(
     authorized_client, test_user, test_posts, title, content, published
 ):
