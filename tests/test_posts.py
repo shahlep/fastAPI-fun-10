@@ -60,8 +60,8 @@ def test_create_post_by_authorized_user(
     )
     created_post = _schemas.PostCreate(**response.json())
     assert response.status_code == 201
-    print(response.json())
-    # assert post.id == test_posts.id
-    # assert created_post.title == title
-    # assert created_post.content == content
-    # assert created_post.published == published
+    #print(response.json())
+
+    assert created_post.title == title
+    assert created_post.content == content
+    assert created_post.published == published
