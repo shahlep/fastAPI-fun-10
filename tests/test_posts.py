@@ -47,9 +47,9 @@ def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
 @mark.parametrize(
     "title,content,published",
     [
-        ("first title", "first content", True),
+        ("first title", "first content",True),
         ("2nd title", "2nd content", False),
-        ("3rd title", "3rd content", True),
+        ("3rd title", "3rd content",True),
     ],
 )
 def test_create_post_by_authorized_user(
@@ -58,5 +58,10 @@ def test_create_post_by_authorized_user(
     response = authorized_client.post(
         "/posts/", json={"title": title, "content": content, "published": published}
     )
-    post = _schemas.ShowPostVote(**response.json())
+    created_post = _schemas.PostCreate(**response.json())
     assert response.status_code == 201
+    print(response.json())
+    #assert post.id == test_posts.id
+    #assert created_post.title == title
+    #assert created_post.content == content
+    #assert created_post.published == published
