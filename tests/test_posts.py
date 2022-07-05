@@ -41,3 +41,8 @@ def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/123")
 
     assert response.status_code == 404
+
+
+def test_create_post_by_authorized_user(authorized_client,test_user,test_posts,
+                                        title,content,published):
+    pass
