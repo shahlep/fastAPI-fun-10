@@ -58,7 +58,7 @@ def test_user(client):
 @fixture(scope="function")
 def test_user2(client):
     user_data = {
-        "email": "test123@example.com",
+        "email": "test124@example.com",
         "password": "password123",
     }
     response = client.post("/users/", json=user_data)
@@ -83,7 +83,7 @@ def authorized_client(client, token):
 
 
 @fixture(scope="function")
-def test_posts(test_user, session):
+def test_posts(test_user, session,test_user2):
     posts_data = [
         {
             "title": "first title",
@@ -99,6 +99,11 @@ def test_posts(test_user, session):
             "title": "3rd title",
             "content": "3rd content",
             "owner_id": test_user["id"],
+        },
+        {
+            "title": "4th title",
+            "content": "4th content",
+            "owner_id": test_user2["id"],
         },
     ]
 
