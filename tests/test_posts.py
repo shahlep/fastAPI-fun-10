@@ -115,4 +115,7 @@ def test_update_post_with_authorized_user(authorized_client,test_posts):
         "content": "Updated content",
         "id": test_posts[0].id,
     }
+    response = authorized_client.put(f"/posts/{test_posts[0].id}",
+                                     json=data)
+
 
