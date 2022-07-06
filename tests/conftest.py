@@ -54,6 +54,18 @@ def test_user(client):
     new_user["password"] = user_data["password"]
     return new_user
 
+@fixture(scope="function")
+def test_user2(client):
+    user_data = {
+        "email": "test123@example.com",
+        "password": "password123",
+    }
+    response = client.post("/users/", json=user_data)
+    assert response.status_code == 201
+    new_user = response.json()
+    new_user["password"] = user_data["password"]
+    return new_user
+
 
 @fixture(scope="function")
 def token(test_user):
