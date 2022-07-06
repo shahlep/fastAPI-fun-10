@@ -54,6 +54,7 @@ def test_user(client):
     new_user["password"] = user_data["password"]
     return new_user
 
+
 @fixture(scope="function")
 def test_user2(client):
     user_data = {
