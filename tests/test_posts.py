@@ -109,16 +109,14 @@ def test_delete_other_user_post(authorized_client, test_posts):
     assert response.status_code == 403
 
 
-def test_update_post_with_authorized_user(authorized_client,test_posts):
+def test_update_post_with_authorized_user(authorized_client, test_posts):
     data = {
         "title": "Updated title",
         "content": "Updated content",
         "id": test_posts[0].id,
     }
-    response = authorized_client.put(f"/posts/{test_posts[0].id}",
-                                     json=data)
+    response = authorized_client.put(f"/posts/{test_posts[0].id}", json=data)
     updated_post = _schemas.ShowPost(**response.json())
     assert response.status_code == 200
-    assert updated_post.title == data['title']
-    assert updated_post.content == data['content']
-
+    assert updated_post.title == data["title"]
+    assert updated_post.content == data["content"]
