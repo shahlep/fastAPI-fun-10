@@ -121,6 +121,7 @@ def test_update_post_with_authorized_user(authorized_client, test_posts):
     assert updated_post.title == data["title"]
     assert updated_post.content == data["content"]
 
+
 def test_update_other_user_post(authorized_client, test_posts):
     data = {
         "title": "Updated title",
@@ -130,5 +131,3 @@ def test_update_other_user_post(authorized_client, test_posts):
     response = authorized_client.put(f"/posts/{test_posts[3].id}", json=data)
 
     assert response.status_code == 403
-
-
