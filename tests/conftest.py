@@ -83,7 +83,7 @@ def authorized_client(client, token):
 
 
 @fixture(scope="function")
-def test_posts(test_user, session,test_user2):
+def test_posts(test_user, session, test_user2):
     posts_data = [
         {
             "title": "first title",
