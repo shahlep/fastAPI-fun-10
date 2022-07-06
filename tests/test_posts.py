@@ -110,4 +110,9 @@ def test_delete_other_user_post(authorized_client, test_posts):
 
 
 def test_update_post_with_authorized_user(authorized_client,test_posts):
-    pass
+    data = {
+        "title": "Updated title",
+        "content": "Updated content",
+        "id": test_posts[0].id,
+    }
+
