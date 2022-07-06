@@ -81,7 +81,8 @@ def test_create_post_with_default_published_by_authorized_user(
     assert created_post.published == True
     assert created_post.owner_id == test_user["id"]
 
-def test_unauthorized_user_ceate_post(client, test_posts):
+
+def test_unauthorized_user_create_post(client, test_posts):
     response = client.post(
         "/posts/", json={"title": "test title", "content": "test content"}
     )
