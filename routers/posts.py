@@ -128,7 +128,7 @@ def update_post(
     # )
     # updated_post = cursor.fetchone()
     # conn.commit()
-    post_query = db.query(_models.Post).filter(_models.Post.id == id).first()
+    post_query = db.query(_models.Post).filter(_models.Post.id == id)
     post = post_query.first()
 
     if post is None:
