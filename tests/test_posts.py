@@ -109,5 +109,5 @@ def test_delete_other_user_post(authorized_client, test_posts):
     assert response.status_code == 403
 
 
-def test_update_post_with_authorized_user():
+def test_update_post_with_authorized_user(authorized_client,test_posts):
     pass
