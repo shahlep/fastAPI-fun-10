@@ -117,5 +117,8 @@ def test_update_post_with_authorized_user(authorized_client,test_posts):
     }
     response = authorized_client.put(f"/posts/{test_posts[0].id}",
                                      json=data)
-
+    updated_post = _schemas.ShowPost(**response.json())
+    assert response.status_code == 200
+    assert updated_post.title == data['title']
+    assert updated_post.content == data['content']
 
