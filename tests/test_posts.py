@@ -143,6 +143,7 @@ def test_unauthenticated_user_update_post(client, test_posts):
 
     assert response.status_code == 401
 
+
 def test_authenticated_user_update_nonexisted_post(authorized_client, test_posts):
     data = {
         "title": "Updated title",
