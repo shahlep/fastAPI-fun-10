@@ -1,9 +1,11 @@
 from pytest import fixture
 import models as _models
 
+
 @fixture(scope="function")
 def test_vote():
     pass
+
 
 def test_vote_on_post_by_auth_user(authorized_client, test_posts):
     response = authorized_client.post(
