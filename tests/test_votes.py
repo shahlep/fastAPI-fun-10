@@ -4,8 +4,8 @@ import models as _models
 
 @fixture(scope="function")
 def test_vote(session, test_user, test_posts):
-    _models.Vote(post_id=test_posts[3].id, user_id=test_user["id"])
-    session.add(_models.Vote)
+    new_vote =_models.Vote(post_id=test_posts[3].id, user_id=test_user["id"])
+    session.add(new_vote)
     session.commit()
 
 
