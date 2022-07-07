@@ -3,8 +3,10 @@ import models as _models
 
 
 @fixture(scope="function")
-def test_vote(authorized_client, test_user, test_posts):
-    pass
+def test_vote(session, test_user, test_posts):
+    _models.Vote(post_id=test_posts[3].id,user_id=test_user['id'])
+    session.add(_models.Vote)
+    session.commit()
 
 
 def test_vote_on_post_by_auth_user(authorized_client, test_posts):
