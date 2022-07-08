@@ -66,8 +66,9 @@ def test_get_user_by_id(authorized_client):
 
     assert response.status_code == 200
 
+
 def test_get_nonexisted_user_by_id(authorized_client):
     response = authorized_client.get(f"/users/100")
 
     assert response.status_code == 404
-    assert response.json().get('detail') == "user with id 100 not found"
+    assert response.json().get("detail") == "user with id 100 not found"
