@@ -80,3 +80,8 @@ def test_get_user_by_id_by_unauthenticated_user(client):
 
     assert response.json().get("detail") == "user with id 1 not found"
     assert response.status_code == 404
+
+def test_get_all_user_by_unauthenticated_user(client):
+    response = client.get("/users/")
+    assert response.json() == []
+    assert response.status_code == 200
