@@ -50,7 +50,7 @@ def test_incorrect_login_user(client, email, password, status_code):
         "/login",
         data={"username": email, "password": password},
     )
-
+    print(response.json())
     assert response.status_code == status_code
     # assert response.json().get("detail") == "Invalid Credentials!"
 
