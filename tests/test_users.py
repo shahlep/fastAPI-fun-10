@@ -74,8 +74,9 @@ def test_get_nonexisted_user_by_id(authorized_client):
     assert response.status_code == 404
     assert response.json().get("detail") == "user with id 100 not found"
 
+
 def test_get_user_by_id_by_unauthenticated_user(client):
     response = client.get(f"/users/1")
 
-    assert response.json().get('detail') == "user with id 1 not found"
+    assert response.json().get("detail") == "user with id 1 not found"
     assert response.status_code == 404
