@@ -53,3 +53,9 @@ def test_incorrect_login_user(client, email, password, status_code):
 
     assert response.status_code == status_code
     # assert response.json().get("detail") == "Invalid Credentials!"
+
+
+def test_get_all_user(authorized_client):
+    response = authorized_client.get("/users/")
+
+    assert response.status_code == 200
