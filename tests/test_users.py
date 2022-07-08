@@ -60,6 +60,7 @@ def test_get_all_user(authorized_client):
 
     assert response.status_code == 200
 
+
 def test_get_user_by_id(authorized_client):
     response = authorized_client.get(f"/users/1")
 
