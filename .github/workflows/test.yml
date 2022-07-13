@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - "main"
-env: {{}} # environment name setup in repo
+
 jobs:
   jobs1:
+    environment:
+      name: testing
     services:
       postgres:
         image: postgres
