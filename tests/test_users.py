@@ -3,11 +3,13 @@ from jose import jwt
 from config.settings import Settings
 from pytest import mark
 
+
 @mark.users
 def test_read_main(client):
     response = client.get("/")
     assert response.status_code == 200
     assert response.json() == {"Message": "Hello World"}
+
 
 @mark.users
 def test_create_user(client):
@@ -17,6 +19,7 @@ def test_create_user(client):
     new_user = ShowUser(**response.json())
     assert response.status_code == 201
     assert new_user.email == "test123@example.com"
+
 
 @mark.users
 def test_login_user(client, test_user):
