@@ -1,5 +1,6 @@
-from pytest import fixture,mark
+from pytest import fixture, mark
 import models as _models
+
 
 @mark.votes
 @fixture(scope="function")
