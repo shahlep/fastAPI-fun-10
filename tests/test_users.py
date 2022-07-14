@@ -9,7 +9,7 @@ def test_read_main(client):
     assert response.status_code == 200
     assert response.json() == {"Message": "Hello World"}
 
-
+@mark.users
 def test_create_user(client):
     response = client.post(
         "/users/", json={"email": "test123@example.com", "password": "password123"}
@@ -18,7 +18,7 @@ def test_create_user(client):
     assert response.status_code == 201
     assert new_user.email == "test123@example.com"
 
-
+@mark.users
 def test_login_user(client, test_user):
     response = client.post(
         "/login",
