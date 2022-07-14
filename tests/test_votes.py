@@ -1,7 +1,7 @@
-from pytest import fixture
+from pytest import fixture,mark
 import models as _models
 
-
+@mark.votes
 @fixture(scope="function")
 def test_vote(session, test_user, test_posts):
     new_vote = _models.Vote(post_id=test_posts[3].id, user_id=test_user["id"])
