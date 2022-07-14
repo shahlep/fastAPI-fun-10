@@ -36,6 +36,7 @@ def test_login_user(client, test_user):
     assert login_response.token_type == "bearer"
     assert response.status_code == 200
 
+
 @mark.users
 @mark.parametrize(
     "email,password,status_code",
@@ -57,11 +58,13 @@ def test_incorrect_login_user(client, email, password, status_code):
     assert response.status_code == status_code
     # assert response.json().get("detail") == "Invalid Credentials!"
 
+
 @mark.users
 def test_get_all_user(authorized_client):
     response = authorized_client.get("/users/")
 
     assert response.status_code == 200
+
 
 @mark.users
 def test_get_user_by_id(authorized_client):
@@ -70,6 +73,7 @@ def test_get_user_by_id(authorized_client):
     assert response.json().get("email") == "test123@example.com"
     assert response.status_code == 200
 
+
 @mark.users
 def test_get_nonexisted_user_by_id(authorized_client):
     response = authorized_client.get(f"/users/100")
@@ -77,12 +81,14 @@ def test_get_nonexisted_user_by_id(authorized_client):
     assert response.status_code == 404
     assert response.json().get("detail") == "user with id 100 not found"
 
+
 @mark.users
 def test_get_user_by_id_by_unauthenticated_user(client):
     response = client.get(f"/users/1")
 
     assert response.json().get("detail") == "user with id 1 not found"
     assert response.status_code == 404
+
 
 @mark.users
 def test_get_all_user_by_unauthenticated_user(client):
