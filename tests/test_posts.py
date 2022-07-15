@@ -30,7 +30,7 @@ def test_unauthorized_user_get_one_post(client, test_posts):
 
     assert response.status_code == 401
 
-
+@mark.posts
 def test_authorized_user_get_one_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/{test_posts[0].id}")
 
@@ -40,13 +40,13 @@ def test_authorized_user_get_one_post(authorized_client, test_posts):
     assert post.Post.title == "first title"
     assert post.Post.content == "first content"
 
-
+@mark.posts
 def test_authorized_user_get_non_existed_post(authorized_client, test_posts):
     response = authorized_client.get(f"/posts/123")
 
     assert response.status_code == 404
 
-
+@mark.posts
 @mark.parametrize(
     "title,content,published",
     [
