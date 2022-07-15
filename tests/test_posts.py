@@ -96,25 +96,30 @@ def test_unauthorized_user_create_post(client, test_posts):
     )
     assert response.status_code == 401
 
+
 @mark.posts
 def test_unauthorized_user_delete_a_post(client, test_posts):
     response = client.delete(f"/posts/{test_posts[0].id}")
     assert response.status_code == 401
+
 
 @mark.posts
 def test_authorized_user_delete_a_post(authorized_client, test_posts):
     response = authorized_client.delete(f"/posts/{test_posts[0].id}")
     assert response.status_code == 204
 
+
 @mark.posts
 def test_authorized_user_delete_nonexisted_post(authorized_client):
     response = authorized_client.delete(f"/posts/123")
     assert response.status_code == 404
 
+
 @mark.posts
 def test_delete_other_user_post(authorized_client, test_posts):
     response = authorized_client.delete(f"/posts/{test_posts[3].id}")
     assert response.status_code == 403
+
 
 @mark.posts
 def test_update_post_with_authorized_user(authorized_client, test_posts):
