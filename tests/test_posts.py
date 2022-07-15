@@ -134,6 +134,7 @@ def test_update_post_with_authorized_user(authorized_client, test_posts):
     assert updated_post.title == data["title"]
     assert updated_post.content == data["content"]
 
+
 @mark.posts
 def test_update_other_user_post(authorized_client, test_posts):
     data = {
@@ -145,6 +146,7 @@ def test_update_other_user_post(authorized_client, test_posts):
 
     assert response.status_code == 403
 
+
 @mark.posts
 def test_unauthenticated_user_update_post(client, test_posts):
     data = {
@@ -155,6 +157,7 @@ def test_unauthenticated_user_update_post(client, test_posts):
     response = client.put(f"/posts/{test_posts[3].id}", json=data)
 
     assert response.status_code == 401
+
 
 @mark.posts
 def test_authenticated_user_update_nonexisted_post(authorized_client, test_posts):
