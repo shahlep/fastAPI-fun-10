@@ -1,6 +1,7 @@
 import schemas as _schemas
 from pytest import mark
 
+
 @mark.posts
 def test_all_posts(authorized_client, test_posts):
     response = authorized_client.get("/posts/")
